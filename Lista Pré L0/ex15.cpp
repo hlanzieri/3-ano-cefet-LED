@@ -13,9 +13,8 @@ void MenorElemento(const vector<int>& V, int &menor) {
 
 void GerandoElementos(vector<int> &V, int n) {
     srand(time(0));
-    V.resize(n);
     for (int i = 0; i < n; i++) {
-        V[i] = rand() % 100 + 1; 
+        V[i] = rand() % 100 + 1;    
     }
 }
 
