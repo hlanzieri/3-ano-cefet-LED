@@ -2,11 +2,6 @@
 
 using namespace std;
 
-/*Faça um programa que receba do usuário o nome de um arquivo texto. Crie um outro
-arquivo texto com o conteúdo do arquivo informado, porém alterando as letras minúsculas
-para maiúsculas e vice-versa. Os demais caracteres deverão ser escritos no arquivo conforme
-o original.*/
-
 int main () {
     string nomeArq;
     cout << "Insira o nome do arquivo de texto:" << endl;
@@ -20,7 +15,7 @@ int main () {
     char c;
     ofstream arquivo("saida.txt");
     if(!arquivo){
-        cerr << "Erro ao abrir arquivo para leitura." << endl;
+        cerr << "Erro ao abrir arquivo para inserção." << endl;
         return 1;
     }
 
