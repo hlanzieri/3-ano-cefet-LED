@@ -2,45 +2,47 @@
 
 using namespace std;
 
-int main () {
-    string nomeArquivo;
-    cout << "Digite o nome do arquivo do labirinto: ";
-    cin >> nomeArquivo;
-    ifstream arqLeitura(nomeArquivo);
-    vector<string> labirinto;
+int validarArquivo(string nomeArquivo){
+    ifstream arqLeitura(nomeArquivo); // abre o arquivo
+    if(!arqLeitura.is_open()){ // verifica se o arquivo com o labirinto foi aberto
+        cerr << endl << "Arquivo nao encontrado";
+        return 1;
+    }
+    vector <string> labirinto;
     string linha;
-    while (getline(arqLeitura, linha)) {
+    while (getline(arqLeitura, linha)) { // getline(cin, linha)
         labirinto.push_back(linha);
     }
     arqLeitura.close();
 
     // Validação: número de linhas e colunas
     int numLinhas = labirinto.size();
-    int numColunas = labirinto.empty() ? 0 : labirinto[0].size();
-    bool valido = true;
-    char permitidos[] = {'#', '.', 'S', 'E', ' '};
-    int nPermitidos = 5;
+    int numColunas = labirinto[0].size();
+    vector <char> permitidos = {'#', '.', 'S', 'E'};
     for (int i = 0; i < numLinhas; i++) {
-        if ((int)labirinto[i].size() != numColunas) {
-            valido = false;
+        if (labirinto[i].size() != numColunas) {
+            return -1;
         }
         for (char c : labirinto[i]) {
             bool achou = false;
-            for (int j = 0; j < nPermitidos; j++) {
+            for (int j = 0; j < permitidos.size(); j++) {
                 if (c == permitidos[j]) {
                     achou = true;
                     break;
                 }
             }
             if (!achou) {
-                valido = false;
+                return -1;
             }
         }
     }
-    if (valido) {
-        cout << labirinto.size() << endl;
-    } else {
-        cout << "-1" << endl;
-    }
+    return labirinto.size();
+}
+
+int main () {
+    string nomeArquivo;
+    cout << "Digite o nome do arquivo do labirinto: ";
+    cin >> nomeArquivo;
+    cout << validarArquivo(nomeArquivo);
     return 0;
 }
