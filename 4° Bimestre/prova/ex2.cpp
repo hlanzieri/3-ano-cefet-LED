@@ -21,6 +21,10 @@ int main () {
     // c)
     vector<int> vetor;
     ifstream arquivo_entrada_A("A.txt");
+    if(!arquivo_entrada_A.is_open()){
+        cerr << endl << "Arquivo nao encontrado";
+        return 1;
+    }
     int num;
     for(int i = 0; i < 20; i++){
         arquivo_entrada_A >> num;
@@ -28,6 +32,10 @@ int main () {
     }
     arquivo_entrada_A.close();
     ifstream arquivo_entrada_B("B.txt");
+    if(!arquivo_entrada_B.is_open()){
+        cerr << endl << "Arquivo nao encontrado";
+        return 1;
+    }
     for(int i = 0; i < 20; i++){
         arquivo_entrada_B >> num; // >> ignora espaços, linhas em branco ou tabulações 
         vetor.push_back(num); // insere-se apenas um numero inteiro no vetor
@@ -35,13 +43,12 @@ int main () {
     arquivo_entrada_B.close();
 
     // d)
-    // Inserindo os numeros do vetor dentro do set em ordem decrescente
-    set<int, greater<int>> distintos;
-    for (int v : vetor) {
+    set<int, greater<int>> distintos; // set para ordenar do maior para o menor (ordem decrescente)
+    for (int v : vetor) { // corre todo o vetor e insere dentro do set
         distintos.insert(v);
     }
     cout << endl << "Numeros distintos em ordem decrescente:" << endl;
-    for (int v : distintos) {
+    for (int v : distintos) {// como estao ordenados de forma decrescente, serao printados v a v
         cout << v << " ";
     }
     cout << endl;
